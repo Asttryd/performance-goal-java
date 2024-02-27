@@ -26,14 +26,35 @@ public abstract class User {
 	public int getSenha() {
 		return senha;
 	}
-	public void setSenha(int senha) {
-		this.senha = senha;
+	public int setSenha(int senha) {
+		return this.senha = senha;
 	}
 	public int getFuncao() {
 		return funcao;
 	}
 	public void setFuncao(int funcao) {
 		this.funcao = funcao;
+	}
+	
+	public void visualizar() {
+		String tipoConta = "";
+		
+		switch(this.funcao) {
+		case 1:
+			tipoConta = "Cliente";
+			break;
+		case 2:
+			tipoConta = "Vendedor";
+			break;
+		}
+		
+		System.out.println("******************************************************");
+		System.out.println("Dados da Conta: ");
+		System.out.println("******************************************************");
+		System.out.println("Id da conta: " + this.id);
+		System.out.println("Nome do usuário: " + this.nomeUsuario);
+		System.out.println("Tipo da conta: " + tipoConta);
+		System.out.println("Senha: " + this.senha);
 	}
 	
 }

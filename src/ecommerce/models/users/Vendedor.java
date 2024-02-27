@@ -1,5 +1,6 @@
 package ecommerce.models.users;
 
+import ecommerce.models.produtos.Produtos;
 import ecommerce.repository.produtos.EcommerceProdutos;
 
 public class Vendedor extends User implements EcommerceProdutos {
@@ -20,22 +21,22 @@ public class Vendedor extends User implements EcommerceProdutos {
 	}
 
 	@Override
-	public void criarProduto() {
-		// TODO Auto-generated method stub
+	public void criarProduto(Produtos produto) {
+		System.out.println("\nO produto " + produto.getNome() + " foi adicionado!");
 		
 	}
 
 	@Override
-	public void listarProdutos() {
-		// TODO Auto-generated method stub
+	public void listarProdutos(Produtos produto) {
+		
 		
 	}
 
-	@Override
-	public void atualizarProduto() {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void atualizarProduto(Produtos produto) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public void deletarProduto() {

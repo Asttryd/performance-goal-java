@@ -54,4 +54,30 @@ public abstract class Produtos {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+public void visualizar() {
+		
+		String tipoProduto = "";
+		
+		switch(this.tipo) {
+		case 1:
+			tipoProduto = "Alimento não Perecível";
+			break;
+		case 2:
+			tipoProduto = "Alimento Perecível";
+			break;
+		case 3:
+			tipoProduto = "Rotineiro";
+			break;
+		}
+		
+		System.out.println("******************************************************");
+		System.out.println("Dados do Produto: ");
+		System.out.println("******************************************************");
+		System.out.println("Id do produto: " + this.id);
+		System.out.println("Nome do produto: " + this.nome);
+		System.out.println("Tipo do produto: " + tipoProduto);
+		System.out.println("Preço: " + "R$" + this.preco);
+		System.out.println("Descrição do produto: " + this.descricao);
+	}
 }
