@@ -12,9 +12,9 @@ public class Menu {
 
 		// Variáveis de entrada de dados
 		int opcao, id, funcao, tipo, senha = 0;
-		String nome = "", descricao, segmento;
-		float preco, limite, valor;
-		boolean ePerecivel;
+		String nomeUsuario = "", descricao, segmento;
+		float preco;
+		boolean refrigeracao;
 		
 		while(true) {
 			System.out.println("                                                     ");
@@ -58,7 +58,7 @@ public class Menu {
 				//Criar conta
 				System.out.println("Digite o nome do usuário: ");
 				leia.skip("\\R?");
-				nome = leia.nextLine();
+				nomeUsuario = leia.nextLine();
 				
 				while(true) {
 					
@@ -78,12 +78,12 @@ public class Menu {
 					funcao = leia.nextInt();
 					
 					if (funcao == 1) {
-						System.out.println("Seja bem vindo(a/e) aos supermercados Lua, " + nome + "!");
+						System.out.println("Seja bem vindo(a/e) aos supermercados Lua, " + nomeUsuario + "!");
 						break;
 					} else if (funcao == 2) {
 						System.out.println("Por favor, digite o seu segmento: ");
 						segmento = leia.nextLine();
-						System.out.println("Seja bem vindo(a/e) à nossa rede de vendas, " + nome + "!");
+						System.out.println("Seja bem vindo(a/e) à nossa rede de vendas, " + nomeUsuario + "!");
 						break;
 					} else {
 						System.out.println("\nNúmero inválido, favor, tente novamente.");
@@ -99,14 +99,13 @@ public class Menu {
 						leia.skip("\\R?");
 						String nomeLogin = leia.nextLine();
 						
-						
 						while (true) {
 							System.out.println("\nDigite a sua senha: ");
 							int senhaLogin = leia.nextInt();
 							if (senhaLogin != senha) {
 								System.out.println("Senha Incorreta. Favor, tente novamente.");
 							} else {
-								System.out.println("Seja bem vindo(a/e) de volta, " + nome + "!");
+								System.out.println("Seja bem vindo(a/e) de volta, " + nomeUsuario + "!");
 								break;
 							}
 						}
