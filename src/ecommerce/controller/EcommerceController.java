@@ -1,5 +1,6 @@
 package ecommerce.controller;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,89 +9,116 @@ import ecommerce.models.users.User;
 import ecommerce.repository.produtos.EcommerceProdutos;
 import ecommerce.repository.users.EcommerceUsers;
 
-public class EcommerceController implements EcommerceProdutos, EcommerceUsers {
+public class EcommerceController implements EcommerceProdutos {
 
 	
 	Scanner leia = new Scanner(System.in);
+	
+	private ArrayList<User> listaUsers = new ArrayList<User>();
+	private ArrayList<Produtos> listaProdutos = new ArrayList<Produtos>();
 	int numero = 0;
 	
 	@Override
 	public void criarProduto(Produtos produto) {
-		System.out.println("\nO produto " + produto.getNome() + " foi criado com sucesso!");
+//		System.out.println("\nO produto " + produto.getNome() + " foi criado com sucesso!");
 	}
+
 
 	@Override
 	public void listarProdutos() {
-		
+		for (var produto : listaProdutos) {
+				produto.visualizar();
+		}
 		
 	}
 
-	//A IMPLEMENTAR NA TASK3
-//	@Override
-//	public void atualizarProduto(Produtos produto) {
-//		
-//		
-//	}
 
 	@Override
-	public void deletarProduto() {
+	public void atualizarProduto(Produtos produto) {
+		var buscarProduto = buscarNaCollectionUser(produto.getId());
 		
-		
+		if (buscarProduto != null) {
+			listaProdutos.set(listaProdutos.indexOf(buscarProduto), produto);
+			System.out.println("\nO produto: " + produto.getId() + " foi atualizada com sucesso!");
+		} else
+			System.out.println("\nO produto: " + produto.getId() + " não foi encontrada!");
 	}
+
+	@Override
+	public void deletarProduto(int id) {
+		var produto = buscarNaCollectionProduto(id);
+		
+		if (produto != null) {
+			if(listaProdutos.remove(produto) == true)
+				System.out.println("\nA Conta numero: " + id + " foi deletada com sucesso!");
+		}else
+			System.out.println("\nA Conta numero: " + id + " não foi encontrada!");
+	}
+	
 	
 	public int gerarNumero() {
 		return ++ numero;
 	}
 
-	@Override
-	public void criarConta(User usuario) {
-		System.out.println("\nSeja bem-vindo(a/e) " + usuario.getNomeUsuario() + "!");
-		
-	}
-
 	
-	@Override
-	public void deletarPerfil(User usuario) {
-		System.out.println("Digite o Id da conta que deseja deletar: ");
-		var buscaPerfil = usuario.getNomeUsuario();
-		
-		if (buscaPerfil != null) {
-			System.out.println("\nO perfil " + usuario.getNomeUsuario() + " foi deletado com sucesso");
-		} else {
-			System.out.println("\nPerfil não encontrado.");
-		}
-		
-	}
-	
-	//A IMPLEMENTAR NA TASK3
 //	@Override
-//	public void atualizarPerfil(String nomeUsuario) {
+//	public void criarConta(User usuario) {
+////		System.out.println("\nSeja bem-vindo(a/e) " + usuario.getNomeUsuario() + "!");
 //		
-//		if (nomeUsuario != null) {
-//
-//			System.out.println("\nA Conta: " + nomeUsuario + " foi atualizada com sucesso!");
-//		} else {
-//			System.out.println("\nA Conta: " + nomeUsuario + " não foi encontrada!");
-//		}
 //	}
+//
+//	@Override
+//	public void atualizarPerfil(User usuario) {
+//		var buscarPerfil = buscarNaCollectionUser(usuario.getId());
+//		
+//		if (buscarPerfil != null) {
+//			listaUsers.set(listaUsers.indexOf(buscarPerfil), usuario);
+//			System.out.println("\nA Conta: " + usuario.getId() + " foi atualizada com sucesso!");
+//		} else
+//			System.out.println("\nA Conta: " + usuario.getId() + " não foi encontrada!");
+//	}
+//	
+//	@Override
+//	public void deletarPerfil(int id) {
+//		var perfil = buscarNaCollectionUser(id);
+//		
+//		if (perfil != null) {
+//			if(listaUsers.remove(perfil) == true)
+//				System.out.println("\nA Conta numero: " + id + " foi deletada com sucesso!");
+//		}else
+//			System.out.println("\nA Conta numero: " + id + " não foi encontrada!");
+//	}
+	
+	
 
-	@Override
-	public void listarProdutos(Produtos produto) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	//A IMPLEMENTAR NA TASK3
-//	public User buscarNaCollection(String nomeUsuario) {
-//		int buscarPerfilId	= usuario.getId();
-//		
-//		if ( buscarPerfilId == id) {
-//				return buscarPerfilId;
-//			}
-//		}
-//		
-//		return null;
-//	}
+	public User buscarNaCollectionUser(int id) {
+		for (var perfil : listaUsers) {
+			if (perfil.getId() == id) {
+				return perfil;
+			}
+		}
+	
+		return null;
+	}
+	
+	public Produtos buscarNaCollectionProduto(int id) {
+		for (var produto : listaProdutos) {
+			if (produto.getId() == id) {
+				return produto;
+			}
+		}
+	
+		return null;
+	}
+
+
+
+
+
+
+
 
 
 }

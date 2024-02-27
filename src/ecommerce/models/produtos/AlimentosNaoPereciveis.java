@@ -13,5 +13,11 @@ public class AlimentosNaoPereciveis extends Produtos{
 	public void setRefrigeracao(boolean refrigeracao) {
 		this.refrigeracao = refrigeracao;
 	}
+	
+	@Override
+	public void visualizar() {
+		super.visualizar();
+		System.out.println("Precisa de refrigeração? " + this.refrigeracao);
+	}
 
 }

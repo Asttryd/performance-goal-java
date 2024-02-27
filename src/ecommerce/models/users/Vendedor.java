@@ -27,19 +27,19 @@ public class Vendedor extends User implements EcommerceProdutos {
 	}
 
 	@Override
-	public void listarProdutos(Produtos produto) {
-		
+	public void atualizarProduto(Produtos produto) {
+		// TODO Auto-generated method stub
 		
 	}
 
-//	@Override
-//	public void atualizarProduto(Produtos produto) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	@Override
+	public void deletarProduto(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public void deletarProduto() {
+	public void listarProdutos() {
 		// TODO Auto-generated method stub
 		
 	}
