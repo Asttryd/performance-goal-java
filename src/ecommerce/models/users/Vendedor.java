@@ -43,6 +43,12 @@ public class Vendedor extends User implements EcommerceProdutos {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void visualizar() {
+		super.visualizar();
+		System.out.println("Segmento: " + this.segmento + "\n\n");
+	}
 
 
 }

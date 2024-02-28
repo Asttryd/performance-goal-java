@@ -54,7 +54,7 @@ public abstract class User {
 		System.out.println("Id da conta: " + this.id);
 		System.out.println("Nome do usuário: " + this.nomeUsuario);
 		System.out.println("Tipo da conta: " + tipoConta);
-		System.out.println("Senha: " + this.senha);
+		System.out.println("Senha: " + this.senha + "\n");
 	}
 	
 }

@@ -1,7 +1,6 @@
 package ecommerce.controller;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ecommerce.models.produtos.Produtos;
@@ -9,7 +8,7 @@ import ecommerce.models.users.User;
 import ecommerce.repository.produtos.EcommerceProdutos;
 import ecommerce.repository.users.EcommerceUsers;
 
-public class EcommerceController implements EcommerceProdutos {
+public class EcommerceController implements EcommerceProdutos, EcommerceUsers {
 
 	
 	Scanner leia = new Scanner(System.in);
@@ -20,28 +19,35 @@ public class EcommerceController implements EcommerceProdutos {
 	
 	@Override
 	public void criarProduto(Produtos produto) {
-//		System.out.println("\nO produto " + produto.getNome() + " foi criado com sucesso!");
+		listaProdutos.add(produto);
+		System.out.println("\nO produto " + produto.getNome() + " foi criado com sucesso!");
 	}
 
 
 	@Override
 	public void listarProdutos() {
-		for (var produto : listaProdutos) {
-				produto.visualizar();
-		}
+		if (listaProdutos.isEmpty()) {
+	        System.out.println("Nenhum produto cadastrado.");
+	    } else {
+	        for (var produto : listaProdutos) {
+	            produto.visualizar();
+	        }
+	    }
 		
 	}
 
 
 	@Override
 	public void atualizarProduto(Produtos produto) {
-		var buscarProduto = buscarNaCollectionUser(produto.getId());
+		var buscaProduto = buscarNaCollectionProduto(produto.getId());
 		
-		if (buscarProduto != null) {
-			listaProdutos.set(listaProdutos.indexOf(buscarProduto), produto);
-			System.out.println("\nO produto: " + produto.getId() + " foi atualizada com sucesso!");
-		} else
-			System.out.println("\nO produto: " + produto.getId() + " não foi encontrada!");
+		if (buscaProduto != null) {
+			listaProdutos.set(listaProdutos.indexOf(buscaProduto), produto);
+			System.out.println("\nO produto de Id: " + produto.getId() + " foi atualizads com sucesso!");
+		} else {
+			System.out.println("\nO produto de Id: " + produto.getId() + " não foi encontrado!");			
+		}
+		
 	}
 
 	@Override
@@ -61,35 +67,47 @@ public class EcommerceController implements EcommerceProdutos {
 	}
 
 	
-//	@Override
-//	public void criarConta(User usuario) {
-////		System.out.println("\nSeja bem-vindo(a/e) " + usuario.getNomeUsuario() + "!");
-//		
-//	}
-//
-//	@Override
-//	public void atualizarPerfil(User usuario) {
-//		var buscarPerfil = buscarNaCollectionUser(usuario.getId());
-//		
-//		if (buscarPerfil != null) {
-//			listaUsers.set(listaUsers.indexOf(buscarPerfil), usuario);
-//			System.out.println("\nA Conta: " + usuario.getId() + " foi atualizada com sucesso!");
-//		} else
-//			System.out.println("\nA Conta: " + usuario.getId() + " não foi encontrada!");
-//	}
-//	
-//	@Override
-//	public void deletarPerfil(int id) {
-//		var perfil = buscarNaCollectionUser(id);
-//		
-//		if (perfil != null) {
-//			if(listaUsers.remove(perfil) == true)
-//				System.out.println("\nA Conta numero: " + id + " foi deletada com sucesso!");
-//		}else
-//			System.out.println("\nA Conta numero: " + id + " não foi encontrada!");
-//	}
+	@Override
+	public void criarConta(User usuario) {
+		listaUsers.add(usuario);
+		System.out.println("\nSeja bem-vindo(a/e) " + usuario.getNomeUsuario() + "!");
+		
+	}
+
+	@Override
+	public void atualizarPerfil(User usuario) {
+		var buscarPerfil = buscarNaCollectionUser(usuario.getId());
+		
+		if (buscarPerfil != null) {
+			listaUsers.set(listaUsers.indexOf(buscarPerfil), usuario);
+			System.out.println("\nA Conta: " + usuario.getId() + " foi atualizada com sucesso!");
+		} else
+			System.out.println("\nA Conta: " + usuario.getId() + " não foi encontrada!");
+	}
+	
+	@Override
+	public void deletarPerfil(int id) {
+		var perfil = buscarNaCollectionUser(id);
+		
+		if (perfil != null) {
+			if(listaUsers.remove(perfil) == true)
+				System.out.println("\nA Conta numero: " + id + " foi deletada com sucesso!");
+		}else
+			System.out.println("\nA Conta numero: " + id + " não foi encontrada!");
+	}
 	
 	
+	@Override
+	public void listarPerfis() {
+		if (listaUsers.isEmpty()) {
+	        System.out.println("Nenhum usuário cadastrado.");
+	    } else {
+	        for (var usuario : listaUsers) {
+	            usuario.visualizar();
+	        }
+	    }
+		
+	}
 
 
 	//A IMPLEMENTAR NA TASK3
@@ -112,6 +130,8 @@ public class EcommerceController implements EcommerceProdutos {
 	
 		return null;
 	}
+
+
 
 
 
